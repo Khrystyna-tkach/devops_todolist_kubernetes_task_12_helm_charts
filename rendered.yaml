@@ -12,6 +12,8 @@ kind: Secret
 metadata:
   name: mysql-secret
   namespace: mysql
+  labels:
+    app: mysql
 type: Opaque
 data:
   MYSQL_DATABASE: "dG9kb19kYg=="
@@ -133,15 +135,17 @@ kind: Service
 metadata:
   name: mysql-headless
   namespace: mysql
+  labels:
+    app: mysql
 spec:
   clusterIP: None
   selector:
-    app:  mysql
+    app: mysql
   ports:
     - name: mysql
       port: 3306
-      targetPort: mysql
-      protocol: TCP
+      targetPort: 3306
+
 
 ---
 # Source: todoapp/charts/mysql/templates/service.yml
@@ -150,15 +154,17 @@ kind: Service
 metadata:
   name: mysql-service
   namespace: mysql
+  labels:
+    app: mysql
 spec:
   type: ClusterIP
   selector:
+    app: mysql
     statefulset.kubernetes.io/pod-name: mysql-statefulset-0
   ports:
     - name: mysql
       port: 3306
-      targetPort: mysql
-      protocol: TCP
+      targetPort: 3306
 # pod-name.service-name.namespace.svc.cluster.local
 # pod-name.service-name
 # mysql-0.mysql.mysql.svc.cluster.local
@@ -365,6 +371,8 @@ kind: StatefulSet
 metadata:
   name: mysql-statefulset
   namespace: mysql
+  labels:
+    app: mysql
 
 spec:
   replicas: 1

@@ -3,6 +3,8 @@ kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-statefulset
   namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
 
 spec:
   replicas: {{ .Values.replicas }}

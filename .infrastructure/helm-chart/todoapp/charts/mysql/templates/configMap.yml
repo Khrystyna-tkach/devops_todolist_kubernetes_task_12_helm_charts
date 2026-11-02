@@ -5,7 +5,7 @@ metadata:
   name: {{ .Chart.Name }}-configmap
   namespace: {{ .Values.namespace }}
   labels:
-    app: mysql
+    app: {{ .Chart.Name}}
 
 data:
   init.sql: |
