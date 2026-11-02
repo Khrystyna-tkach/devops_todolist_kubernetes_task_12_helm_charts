@@ -11,10 +11,10 @@ kubectl describe nodes -l app=mysql
 ```
 ## Validate Helm charts
 ```bash
-helm dependency list ./helm-chart/todoapp
-helm lint ./helm-chart/todoapp
+helm dependency list ./.infrastructure/helm-chart/todoapp
+helm lint ./.infrastructure/helm-chart/todoapp
 helm lint ./helm-chart/todoapp/charts/mysql
-helm template todoapp ./helm-chart/todoapp --namespace todoapp
+helm template todoapp ./.infrastructure/helm-chart/todoapp --namespace todoapp
 ```
 ## Deploy
 ```bash
@@ -35,6 +35,7 @@ kubectl get svc -n mysql
 ```bash
 kubectl get pv
 kubectl get pvc -A
+```
 ## Check logs
 ```bash
 kubectl logs deployment/todoapp-deployment -n todoapp

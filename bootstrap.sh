@@ -42,13 +42,13 @@ fi
 kubectl rollout status deployment/metrics-server -n kube-system --timeout=240s
 
 # Validate Helm dependencies
-helm dependency list ./helm-chart/todoapp
+helm dependency list ./.infrastructure/helm-chart/todoapp
 
 # Validate Helm chart
-helm lint ./helm-chart/todoapp
+helm lint ./.infrastructure/helm-chart/todoapp
 
 # Deploy TodoApp and MySQL using Helm
-helm upgrade --install todoapp ./helm-chart/todoapp --namespace todoapp --wait --timeout 10m
+helm upgrade --install todoapp ./.infrastructure/helm-chart/todoapp --namespace todoapp --wait --timeout 10m
 
 # Verify Helm release
 helm list -A
